@@ -1,0 +1,61 @@
+body {
+  background-color: #f8f9fa;
+  margin-bottom: 2rem;
+}
+
+.card {
+  border-radius: 12px;
+}
+
+.table th {
+  background-color: #212529;
+  color: #fff;
+}
+
+#txnTable td, #txnTable th {
+  vertical-align: middle;
+}
+
+.budget-progress .progress-bar {
+  width: calc(var(--pct) * 1%);
+  transition: width 0.6s ease;
+  height: 100%;
+  border-radius: 6px;
+}
+/* Budget progress styling */
+.budget-progress {
+  --progress: 0;
+  background-color: #e9ecef;
+  height: 10px;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+.budget-progress .progress-bar {
+  width: calc(var(--progress) * 1%);
+  transition: width 0.6s ease;
+  height: 100%;
+  border-radius: 6px;
+  position: relative;
+}
+
+.progress-label {
+  position: absolute;
+  right: 8px;
+  top: -20px;
+  font-size: 0.8rem;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Animate when over budget */
+.budget-progress .bg-danger {
+  animation: pulse-red 1.5s infinite;
+}
+
+@keyframes pulse-red {
+  0% { filter: brightness(1); }
+  50% { filter: brightness(1.3); }
+  100% { filter: brightness(1); }
+}

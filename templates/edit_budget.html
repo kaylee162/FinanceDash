@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Edit Budget{% endblock %}
+{% block content %}
+<h2 class="mb-4">Edit Budget</h2>
+
+<form method="POST">
+  {{ form.hidden_tag() }}
+  <div class="mb-3">
+    {{ form.category.label(class="form-label") }}
+    {{ form.category(class="form-select") }}
+  </div>
+  <div class="mb-3">
+    {{ form.limit.label(class="form-label") }}
+    {{ form.limit(class="form-control") }}
+  </div>
+  {{ form.submit(class="btn btn-primary") }}
+  <a href="{{ url_for('dashboard.dashboard') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

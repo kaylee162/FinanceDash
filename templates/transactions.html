@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Transactions{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Your Transactions</h2>
+  <a href="{{ url_for('transactions.add_transaction') }}" class="btn btn-primary">+ Add</a>
+</div>
+
+{% if txns %}
+<table class="table table-striped table-hover shadow-sm">
+  <thead class="table-dark">
+    <tr>
+      <th>Date</th>
+      <th>Type</th>
+      <th>Category</th>
+      <th>Amount</th>
+      <th>Description</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for t in txns %}
+    <tr>
+        <td>{{ t.date.strftime("%Y-%m-%d") }}</td>
+        <td>{{ t.type.title() }}</td>
+        <td>{{ t.category }}</td>
+        <td>${{ "%.2f"|format(t.amount) }}</td>
+        <td>{{ t.description }}</td>
+        <td>
+            <a href="{{ url_for('transactions.edit_transaction', txn_id=t.id) }}" 
+                class="btn btn-sm btn-outline-secondary me-1">
+                <i class="fa fa-edit"></i> Edit
+            </a>
+
+            <form method="POST" 
+                    action="{{ url_for('transactions.delete_transaction', txn_id=t.id) }}" 
+                    style="display:inline;" 
+                    onsubmit="return confirm('Delete this transaction?');">
+                <button class="btn btn-sm btn-outline-danger">
+                <i class="fa fa-trash"></i> Delete
+                </button>
+            </form>
+        </td>
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+  <p class="text-muted">No transactions yet. <a href="{{ url_for('transactions.add_transaction') }}">Add one</a>!</p>
+{% endif %}
+{% endblock %}
